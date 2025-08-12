@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg bg-white border-bottom py-2">
+  <div class="container-fluid">
+    <!-- Logo -->
+    <a class="navbar-brand d-flex align-items-center" href="/get_all_foods">
+        <img class="logo" src="/images/feedup_logo.png" alt="">
+    </a>
+
+
+    
+    
+    <!-- LAST PART NAV-->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+      <div class="d-flex align-items-center gap-3">
+        <div class="modal-dialog modal-dialog-centered">
+            <a href="#" class="btn btn-danger rounded-pill px-3">Manzil</a>
+        </div>
+        <a href="#" class="btn btn-danger rounded-pill px-3">Bog'lanish</a>
+        <!-- <div class="d-flex flex-column">
+          <a href="tel:+998712002211" class="fw-bold text-dark text-decoration-none">+998 71 200 22 11</a>
+            small class="text-muted" style="font-size: 12px;">Ежедневно с 09:00 до 01:45</small> -->
+    
+
+</div>
+    </div>
+  </div>
+</nav> 
+
+<!-- Carousel -->
+<div id="mainCarousel" class="carousel slide" data-bs-ride="carousel">
+  <!-- Indicators -->
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="0" class="active"></button>
+    <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="1"></button>
+    <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="2"></button>
+  </div>
+
+
+
+<!-- CARDS -->
+<div class="container my-5">
+  <h1 class="mb-4 text-center">Ovqatlar</h1>
+  <div class="row justify-content-center">
+    <div class="col-md-6 col-lg-4">
+      <div class="card shadow-sm mb-4">
+        <img src="/images/food_image.webp" class="card-img-top" alt="Food image" style="height: 250px; object-fit: cover;">
+        <div class="card-body">
+          <h5 class="card-title"><%= foundedFoods.title %></h5>
+          <p class="card-text h5 text-danger fw-bold mb-2"><%= foundedFoods.new_price %> so‘m</p>
+          <p class="card-text text-muted text-decoration-line-through mb-3"><%= foundedFoods.old_price %> so‘m</p>
+
+          <!-- DELETE -->
+<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete_<%= foundedFoods.id %>">Delete</button>
+
+<div class="modal fade" id="delete_<%= foundedFoods.id %>" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5">Ovqatni o'chirasizmi?</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Yo'q</button>
+        <form action="http://localhost:4001/delete_food/<%= foundedFoods.id %>" method="post">
+          <button type="submit" class="btn btn-primary">Ha</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- DELETE -->
+ <!-- UPDATE  -->
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#update">
+  Update
+</button>
+
+<!-- Modal -->
+<form action="/update_food/<%= foundedFoods.id %>" method="post">
+<div class="modal fade" id="update" tabindex="-1" aria-labelledby="updateLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+<h1 class="modal-title fs-5" id="updateLabel"><%= foundedFoods.title %></h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Ovqat nomi</label>
+    <input type="text" class="form-control" name="title" value="<%= foundedFoods.title %>" id="exampleInputEmail1" aria-describedby="emailHelp">
+  </div>
+    <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Eski narx</label>
+    <input type="text" class="form-control" name="old_price " value="<%= foundedFoods.old_price %>"  id="exampleInputEmail1" aria-describedby="emailHelp">
+  </div>
+    <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Yangi narx</label>
+    <input type="text" class="form-control" name="new_price" value="<%= foundedFoods.new_price %>"  id="exampleInputEmail1" aria-describedby="emailHelp">
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- UPDATE  -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div> 
+
+
+
+
+
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
+</body>
+</html>
